@@ -1,0 +1,43 @@
+--	Lấy ra danh sách worker: ID, Name, Store_ID và Enterprise_Name
+--	tại doanh nghiệp có ID là '111113' và sắp xếp theo tên nhân viên từ A->Z
+		SELECT Worker_ID, Worker_Name, Worker_Store, Enterprise_Name 
+		FROM Worker, Enterprise, Store
+		WHERE Enterprise_ID = 111113 AND Worker_Enterprise = Enterprise_ID AND Worker_Store = Store_ID
+		ORDER BY Store_ID, Worker_Name ASC;
+	
+--	Lấy ra danh sách các nhân viên có đi làm ngày 22/12/2020 tại cac cửa hàng và 
+--    sắp xếp ten nhan vien tu Z->A;
+		SELECT Worker_ID, Worker_Name, Worker_Store, Worker_Enterprise 
+		FROM Worker, Timesheet 
+		WHERE Worker_Store = Timesheet_Store AND Timesheet_Worker = Worker_ID AND Timesheet_Enterprise = Worker_Enterprise AND Timesheet_Date = '2020-12-22' 
+		ORDER BY Worker_Name DESC;
+
+--	Lấy ra danh sách worker co so ngay di lam > 1 voi cac thong tin: Worker_ID, Worker_Store va so ngay di lam cua tung nguoi(COUNT), 
+--  nhóm theo Worker_ID va Worker_Store (GROUP BY) và sắp xếp Worker_ID (ORDER BY).
+		SELECT Worker_ID, Worker_Store, COUNT(Timesheet_WorkerNo) AS "WorkDate"
+		FROM Timesheet, Worker
+		WHERE Timesheet_Worker = Worker_ID AND Worker_Store = Timesheet_Store AND Timesheet_Enterprise = Worker_Enterprise
+		GROUP BY Worker_ID, Worker_Store
+		HAVING WorkDate > 1
+		ORDER BY Worker_ID;
+
+
+--  Lay ra tong so gio lam viec tai cac doanh nghiep
+--  
+	
+
+--	Viết thủ tục hiển thị danh sách các nhan vien co expire day sau 31/12/2020
+		DROP PROCEDURE if EXISTS ExpiredList;
+		DELIMITER $$
+		CREATE PROCEDURE ExpiredList(IN expDay DATETIME)
+			BEGIN
+				SELECT Staff_ID, Worker_Name, Staff_Store, Staff_Expire
+				FROM Staff, Worker
+				WHERE Staff_ID = Worker_ID AND Staff_Store = Worker_Store AND Staff_Expire > expDay;
+			END $$
+		DELIMITER ;
+
+
+
+
+
