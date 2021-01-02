@@ -5,6 +5,13 @@ exports.listAllEnterprises = function(req, res) {
 }
 
 exports.listEnterpriseWithID = function(req, res) {
-    var id = req.params.id;
+    req.params.id;
     model.listEnterpriseWithID(id, res)
+}
+
+exports.checkAccount = function(req, res) {
+    var username = req.query.username;
+    var password = req.query.password;
+    var results = model.checkAccount(username, password, res)
+    // res.send(results)
 }

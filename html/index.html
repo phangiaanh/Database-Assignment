@@ -6,44 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Database </title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+
+<script src="../script/script.js" type="text/javascript"></script>
+
 <center>
     <h1>
         List of Enterprises
     </h1>
 </center>
 
-<div class="grid-container" id="AAA">
-    
+
+<button onclick="listAllEnterprises()">Refresh</button>
+
+<div class="grid-container" id="Enterprises Framework">
+
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $.ajax({    
-        url: 'http://google.com',
-        dataType: "jsonp",
-        type: "get",
-        cache: false,
-        timeout: 5000,
-        success: function(data) {
-            console.log(data)
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert('error ' + textStatus + " " + errorThrown);
-        }
-    });
-
-</script>
-
-<script>
-    var para = document.createElement("p");
-    var node = document.createTextNode("This iss new.");
-    para.appendChild(node);
-    var element = document.getElementById("AAA");
-    element.appendChild(para);
-    </script>
-</body>
-
+<center>
+    <h1>
+        Contact: Ho Chi Minh City of Technology<br>
+    Department: Computer Science and Engineering
+    </h1>
+    
+</center>
 </html>

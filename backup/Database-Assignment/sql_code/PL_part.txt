@@ -1,0 +1,63 @@
+// STORE PROCEDURE
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetExactStoreAddress`()
+BEGIN
+	SELECT e.enterprise_name, e.enterprise_address, s.store_address  
+    FROM enterprise e 
+    inner join store s
+    ON e.Enterprise_ID = s.Store_Enterprise;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getStockAreaLessThan`(IN area int)
+BEGIN
+	if area <= 0 then	SELECT "Gia tri dau vao phai la so duong";
+	else
+		SELECT e.enterprise_name, e.enterprise_address, s.stock_address, s.stock_area  
+		FROM enterprise e 
+		inner join stock s
+		ON e.Enterprise_ID = s.Stock_Enterprise
+        WHERE s.stock_area < area;
+	END if;
+END
+
+// TRIGGER
+
+---------// BATCH - STOCK --------
+CREATE DEFINER=`root`@`localhost` TRIGGER `batch_AFTER_INSERT` AFTER INSERT ON `batch` FOR EACH ROW UPDATE stock
+SET stock_batchnumber = stock_batchnumber + 1
+WHERE stock_id = new.batch_stock
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `batch_AFTER_DELETE` AFTER DELETE ON `batch` FOR EACH ROW update stock
+SET stock_batchnumber = stock_batchnumber - 1
+WHERE stock_id = old.batch_stock
+
+---------// STORE-WORKER-STAFF-MANAGER --------
+CREATE DEFINER=`root`@`localhost` TRIGGER `store_AFTER_UPDATE` AFTER UPDATE ON `store` FOR EACH ROW BEGIN
+	if new.Store_Active = 0  then
+		begin
+			SET foreign_key_checks = 0;
+			update staff set staff_store=0 where staff_store=new.store_id;
+			update manager set manager_store=0 where manager_store=new.store_id;
+			update worker set worker_store=0 where worker_store=new.store_id;
+			SET foreign_key_checks = 1;
+        end;
+        end if; 
+END
+
+// STORED FUNCTION
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `store_count`(enter_ID int ) RETURNS int
+    DETERMINISTIC
+BEGIN
+	declare rtvalue int;
+	if enter_ID <> 0 then
+		set rtvalue = (select count(store_enterprise) 
+						from store 
+						where store_enterprise=enter_id 
+						group by store_enterprise);
+		else set rtvalue = (select count(*) from store); 
+    end if;
+    if rtvalue is null then return 0;
+    else return rtvalue;
+    end if;
+END
