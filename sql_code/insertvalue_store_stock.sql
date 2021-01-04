@@ -7,14 +7,14 @@ insert into stock values 	(307, "Tran Xuan Soan", 1735, 1, 3, 2409),
 							(313, "Au Co", 2230, 1, 6, 5100),
                             (990, "Nguyen Hue", 990, 2, 2, 1234);
                             
-insert into store values 	(1100, 1, 1, "Ly Thuong Kiet", "Pikachu", 307),
-							(1050, 1, 1, "Le Hong Phong", "Psyduck", 313),
-							(1030, 1, 1, "Ly Chinh Thang", "Nidoran", 307),
-							(1040, 1, 1, "Ton Dan", "Electrode", 307),
-							(1090, 1, 1, "Le Van Viet", "Snorlax", 313),
-							(2010, 2, 1, "Nguyen Thai Hoc", "Charmander", 990),
-							(2030, 2, 1, "Mau Than", "Squirtle", 990),
-							(2040, 2, 1, "Pham Thai Buong", "Bulbasaur", 990);
+insert into store values 	(1100, 1, 1, "Ly Thuong Kiet", "Pikachu", NULL, 307),
+							(1050, 1, 1, "Le Hong Phong", "Psyduck", NULL 313),
+							(1030, 1, 1, "Ly Chinh Thang", "Nidoran", NULL, 307),
+							(1040, 1, 1, "Ton Dan", "Electrode", NULL, 307),
+							(1090, 1, 1, "Le Van Viet", "Snorlax", NULL, 313),
+							(2010, 2, 1, "Nguyen Thai Hoc", "Charmander", NULL, 990),
+							(2030, 2, 1, "Mau Than", "Squirtle", NULL, 990),
+							(2040, 2, 1, "Pham Thai Buong", "Bulbasaur", NULL, 990);
 
 insert into worker values   (10, 1100, 1, "Tran Duc Bo", "331902859", "03212345678"),
 							(20, 1050, 1, "Tran Dan", "331624839", "03212345678"),

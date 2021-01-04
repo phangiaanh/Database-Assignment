@@ -9,7 +9,7 @@ function closeSpan() {
 
 function listAllEnterprises() {
     $.ajax({
-        url: "http://localhost:9999/something",
+        url: "http://localhost:9999/enterprise",
         crossDomain: true,
         dataType: 'jsonp',
         jsonp : true,
@@ -51,13 +51,23 @@ function listAllEnterprises() {
 function checkForm(e, text) {
     var code = (e.keyCode ? e.keyCode : e.which)
     if (code == 13) {
-        // $.ajax({
-        //     url: "localhost:9999/account",
-        //     dataType: 'jsonp',
-        //     data: {
-        //         user: document.getElementById("user").node
-        //     }
-        // })
-        console.log(document.getElementById("user").value)
+        $.ajax({
+            url: "http://localhost:9999/account",
+            dataType: 'jsonp',
+            data: {
+                user: document.getElementById("user").value,
+                pwd: document.getElementById("pass").value,
+                enterprise: Enterprise
+            }, 
+            crossDomain: true,
+            success: (res) => {},
+            error: (res) => {
+                if(temp == 1) {
+                    alert('Access success to ' + Enterprise)
+                    temp = 0
+                } 
+                else alert('Access Failed')
+            }
+        })
     }
 }

@@ -15,13 +15,22 @@ var corsOptions = {
     
 };
 
-routing(app);
 
 app.use(cors());
 
+
+
 app.use(bodyParser.json());
 
+app.use(express.json({
+    type: 'application/json',
+}));
+
 app.use(bodyParser.urlencoded({extended: true}));
+
+
+
+routing(app);
 
 app.listen(port, ()=>{
     console.log('Server is running on port: ' + port);    

@@ -6,13 +6,14 @@ module.exports = (app, conn) => {
     .get(controller.checkAccount)
 
     // Route for enterprise 
-    app.route('/something')
+    app.route('/enterprise')
     .get(controller.listAllEnterprises)
-    
+    .post(controller.addEnterprise)
+    .put(controller.updateEnterprise)
 
-    app.route('/something/:id')
+    app.route('/enterprise/:id')
     .get(controller.listEnterpriseWithID)
-
+    .delete(controller.deleteEnterpriseWithID)
     
 
     // Route for store
