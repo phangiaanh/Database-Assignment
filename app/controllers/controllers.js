@@ -30,3 +30,28 @@ exports.deleteEnterpriseWithID = function(req, res) {
     let id = req.params.id
     model.deleteEnterpriseWithID(id, res)
 }
+
+
+// Worker
+
+exports.listAllWorkers = function(req, res) {
+    model.listAllWorkers(req, res)
+}
+
+exports.listWorkerWithID = function(req, res) {
+    let id = req.params.id;
+    model.listWorkerWithID(id, res)
+}
+
+exports.addWorker = function(req, res) {
+    model.addWorker(req, res)
+}
+
+exports.updateWorker = function(req, res) {
+    model.updateWorker(req, res)
+}
+
+exports.deleteWorkerWithID = function(req, res) {
+    let id = req.params.id;
+    model.deleteWorkerWithID(id, res)
+}

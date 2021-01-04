@@ -3,20 +3,35 @@ module.exports = (app, conn) => {
 
     // Route for account
     app.route('/account')
-    .get(controller.checkAccount)
+        .get(controller.checkAccount)
 
     // Route for enterprise 
     app.route('/enterprise')
-    .get(controller.listAllEnterprises)
-    .post(controller.addEnterprise)
-    .put(controller.updateEnterprise)
+        .get(controller.listAllEnterprises)
+        .post(controller.addEnterprise)
+        .put(controller.updateEnterprise)
 
     app.route('/enterprise/:id')
-    .get(controller.listEnterpriseWithID)
-    .delete(controller.deleteEnterpriseWithID)
-    
+        .get(controller.listEnterpriseWithID)
+        .delete(controller.deleteEnterpriseWithID)
+
 
     // Route for store
-    
-    
+
+
+
+
+
+
+
+
+    // Route for Worker
+    app.route('/worker')
+        .get(controller.listAllWorkers)
+        .post(controller.addWorker)
+        .put(controller.updateWorker)
+
+    app.route('/worker/:id')
+        .get(controller.listWorkerWithID)
+        .delete(controller.deleteWorkerWithID)
 }
