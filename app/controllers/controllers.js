@@ -55,3 +55,22 @@ exports.deleteWorkerWithID = function(req, res) {
     let id = req.params.id;
     model.deleteWorkerWithID(id, res)
 }
+
+exports.listWorkersWithEnterID = function(req, res) {
+    let id = req.params.id;
+    model.listWorkersWithEnterID(id, res);
+}
+exports.listWorkersWithWorkdate = function(req, res) {
+    let date = req.params.date;
+    model.listWorkersOnDate(date, res)
+}
+
+exports.listWorkersWithExpireDayAfter = function(req, res) {
+    let date = req.params.date;
+    model.listWorkersWithExpireDayAfter(date, res)
+}
+
+exports.listWorkersWithMoreWorkdate = function(req, res) {
+    let workdate = req.params.workdate;
+    model.listWorkersWithMoreWorkdate(workdate, res)
+}

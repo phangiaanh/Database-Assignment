@@ -149,3 +149,55 @@ exports.deleteWorkerWithID = function(id, res) {
         res.send(results)
     })
 }
+
+exports.listWorkersWithEnterID = function(id, res) {
+    var sql = `SELECT Worker_ID, Worker_Name, Worker_Store, Enterprise_Name 
+        FROM Worker, Enterprise
+        WHERE Enterprise_ID = ${id} AND Worker_Enterprise = Enterprise_ID
+        ORDER BY Store_ID, Worker_Name ASC;`
+    conn.conn.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+}
+
+exports.listWorkersOnDate = function(date, res) {
+    var sql = `SELECT Worker_ID, Worker_Name, Worker_Store, Worker_Enterprise 
+        FROM Worker, Timesheet 
+        WHERE Worker_Store = Timesheet_Store 
+                AND Timesheet_Worker = Worker_ID 
+                AND Timesheet_Enterprise = Worker_Enterprise 
+                AND Timesheet_Date = '${date}' 
+        ORDER BY Worker_Name DESC;`
+    conn.conn.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+}
+
+exports.listWorkersWithExpireDayAfter = function(date, res) {
+    var sql = `CALL ExpiredList('${date}')`
+    conn.conn.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+}
+
+exports.listWorkersWithMoreWorkdate = function(workdate, res) {
+    var sql = `SELECT Worker_ID, Worker_Store, COUNT(Timesheet_WorkerNo) AS "WorkDate"
+        FROM Timesheet, Worker
+        WHERE Timesheet_Worker = Worker_ID 
+                AND Worker_Store = Timesheet_Store 
+                AND Timesheet_Enterprise = Worker_Enterprise
+        GROUP BY Worker_ID, Worker_Store
+        HAVING WorkDate > ${workdate}
+        ORDER BY Worker_ID;`
+    conn.conn.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+}
