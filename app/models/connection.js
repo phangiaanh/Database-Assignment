@@ -13,7 +13,7 @@ module.exports.connect = (config) => {
         console.log("Connected!!!")
     });
 
-    token.query('USE A;')
+    token.query('USE T;')
 
     module.exports.conn = token;
 }

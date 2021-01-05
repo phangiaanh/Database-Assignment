@@ -27,7 +27,7 @@ INSERT INTO Enterprise VALUES (04, 'Vinmart', NULL, 'BinhTan', 'Vinmart@gmail.co
 insert into Enterprise values
 	(05, "Co Loa", NULL, "Ho Chi Minh", "contact@coloa.com", "19000001", "Cong ty Giai tri", "giaanhphan"), 
 	(06, "Van Tich", NULL, "Vinh Long", "followme@vantich.com", "19000002", "Cong ty Doi no", "philong"),
-    (07, "Dai Viet", NULL, "Binh Duong", "helloworld@daiviet.com", "19000003", "Cong ty Thoi trang", "giaanhphan");
+    (07, "Dai Viet", NULL, "Binh Duong", "hello@daiviet.com", "19000003", "Cong ty Thoi trang", "giaanhphan");
 
 
 -- Certification
@@ -43,7 +43,7 @@ INSERT INTO Store VALUES (102, 01, 0, 'ktx_khu_B', NULL, NULL, 0123);
 INSERT INTO Store VALUES (201, 02, 1, 'Quan_10', NULL, NULL, 0103);
 INSERT INTO Store VALUES (202, 02, 1, 'Go_Vap', NULL, NULL, 0113);
 insert into Store values 	(1100, 5, 1, "Ly Thuong Kiet", "Pikachu", NULL, 307),
-							(1050, 5, 0, "Le Hong Phong", "Psyduck", NULL 313),
+							(1050, 5, 0, "Le Hong Phong", "Psyduck", NULL, 313),
 							(1030, 5, 0, "Ly Chinh Thang", "Nidoran", NULL, 307),
 							(1040, 5, 1, "Ton Dan", "Electrode", NULL, 307),
 							(1090, 5, 1, "Le Van Viet", "Snorlax", NULL, 313),
@@ -95,11 +95,11 @@ INSERT INTO  Worker Values (1915903, 01, 102, 'PhiLong', '300995425', '095700337
 INSERT INTO  Worker Values (1915904, 01, 102, 'ThaoNguyen', '361995426', '0157323372');
 INSERT INTO  Worker Values (1915905, 01, 102, 'TrungTran', '371995427', '0257124373');
 INSERT INTO  Worker Values (1815900, 02, 201, 'TuNgo', '441995424', '0897223370');
-INSERT INTO  Worker Values (1815901, 02, 201, 'QuynhLe', '541995424', '0998223371')
-INSERT INTO  Worker Values (1815902, 02, 201, 'CaoSang', '541995400', '0108224372')
-INSERT INTO  Worker Values (1815903, 02, 202, 'ThanhLy', '641995424', '0998223372')
-INSERT INTO  Worker Values (1815904, 02, 202, 'GiaAnh', '741995424', '0998223373')
-INSERT INTO  Worker Values (1815905, 02, 202, 'QuyenTran', '841995424', '0198223374')
+INSERT INTO  Worker Values (1815901, 02, 201, 'QuynhLe', '541995424', '0998223371');
+INSERT INTO  Worker Values (1815902, 02, 201, 'CaoSang', '541995400', '0108224372');
+INSERT INTO  Worker Values (1815903, 02, 202, 'ThanhLy', '641995424', '0998223372');
+INSERT INTO  Worker Values (1815904, 02, 202, 'GiaAnh', '741995424', '0998223373');
+INSERT INTO  Worker Values (1815905, 02, 202, 'QuyenTran', '841995424', '0198223374');
 
 
 INSERT INTO Staff VALUES (1915900, 101, 01, '2020-06-12');
