@@ -33,13 +33,22 @@ module.exports = (app, conn) => {
 
     app.route('/worker/:id')
         .get(controller.listWorkerWithID)
-        .get(controller.listWorkersWithEnterID)
         .delete(controller.deleteWorkerWithID)
 
-    app.route('/worker/:date')
+    app.route('/worker/enterpriseid/:id')
+        .get(controller.listWorkersWithEnterID)
+
+    app.route('/worker/ondate')
         .get(controller.listWorkersOnDate)
+
+    app.route('/worker/expireday/')
         .get(controller.listWorkersWithExpireDayAfter)
 
-    app.route('/worker/:workdate')
+    app.route('/worker/workdate/:workdate')
         .get(controller.listWorkersWithMoreWorkdate)
+
+
+    // Route for Staff
+    app.route('/Staff')
+        .get(controller.listAllStaffs)
 }

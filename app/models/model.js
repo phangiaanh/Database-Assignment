@@ -28,7 +28,7 @@ exports.listAllEnterprises = function(req, res) {
 }
 
 exports.listEnterpriseWithID = function(id, res) {
-    var sql = `SELECT * FROM Enterprise WHERE Enterprise.Enterprise_ID = ' + id`;
+    var sql = `SELECT * FROM Enterprise WHERE Enterprise.Enterprise_ID = ${id}`;
     conn.conn.query(sql, (err, results) => {
         if (err) throw err;
         console.log(results[0])
@@ -97,7 +97,7 @@ exports.listAllWorkers = function(req, res) {
 }
 
 exports.listWorkerWithID = function(id, res) {
-    var sql = `SELECT * FROM Worker WHERE Worker.Worker_ID = ' + id`;
+    var sql = `SELECT * FROM Worker WHERE Worker.Worker_ID = ${id}`;
     conn.conn.query(sql, (err, results) => {
         if (err) throw err;
         console.log(results[0])
@@ -109,15 +109,15 @@ exports.addWorker = function(req, res) {
     req = req.body
     var sql = `INSERT INTO Worker VALUES (
     ${req.Worker_ID}, 
+    ${req.Worker_Enterprise},
+    ${req.Worker_Store},
     '${req.Worker_Name}',
-    '${req.Worker_Store}',
-    '${req.Worker_Enterprise}',
     '${req.Worker_ICNumber}',
     '${req.Worker_Phone}')`
     sql = sql.replace(/(\r\n|\n|\t|\r)/gm, "")
     conn.conn.query(sql, (err, results) => {
-        if (err) throw err;
         console.log(results)
+        if (err) throw err;
         res.send(results)
     })
 }
@@ -151,10 +151,10 @@ exports.deleteWorkerWithID = function(id, res) {
 }
 
 exports.listWorkersWithEnterID = function(id, res) {
-    var sql = `SELECT Worker_ID, Worker_Name, Worker_Store, Enterprise_Name 
+    var sql = `SELECT Worker_ID, Worker_Name, Worker_Store, Enterprise_Name
         FROM Worker, Enterprise
-        WHERE Enterprise_ID = ${id} AND Worker_Enterprise = Enterprise_ID
-        ORDER BY Store_ID, Worker_Name ASC;`
+        WHERE Worker_Enterprise = ${id} AND Enterprise_ID = Worker_Enterprise
+        ORDER BY Worker_Store, Worker_Name ASC;`
     conn.conn.query(sql, (err, results) => {
         if (err) throw err;
         console.log(results)
@@ -162,13 +162,13 @@ exports.listWorkersWithEnterID = function(id, res) {
     })
 }
 
-exports.listWorkersOnDate = function(date, res) {
+exports.listWorkersOnDate = function(req, res) {
     var sql = `SELECT Worker_ID, Worker_Name, Worker_Store, Worker_Enterprise 
         FROM Worker, Timesheet 
         WHERE Worker_Store = Timesheet_Store 
                 AND Timesheet_Worker = Worker_ID 
                 AND Timesheet_Enterprise = Worker_Enterprise 
-                AND Timesheet_Date = '${date}' 
+                AND Timesheet_Date = '2020-12-31' 
         ORDER BY Worker_Name DESC;`
     conn.conn.query(sql, (err, results) => {
         if (err) throw err;
@@ -177,8 +177,8 @@ exports.listWorkersOnDate = function(date, res) {
     })
 }
 
-exports.listWorkersWithExpireDayAfter = function(date, res) {
-    var sql = `CALL ExpiredList('${date}')`
+exports.listWorkersWithExpireDayAfter = function(req, res) {
+    var sql = `CALL ExpiredList('2020-02-01');`
     conn.conn.query(sql, (err, results) => {
         if (err) throw err;
         console.log(results)
@@ -199,5 +199,16 @@ exports.listWorkersWithMoreWorkdate = function(workdate, res) {
         if (err) throw err;
         console.log(results)
         res.send(results)
+    })
+}
+
+
+exports.listAllStaffs = function(req, res) {
+    var sql = 'SELECT * FROM Staff';
+    conn.conn.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(results)
+            // res.send(results)
+        res.end(`temp=${JSON.stringify(results)}`)
     })
 }
